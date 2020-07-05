@@ -1,18 +1,18 @@
-name: Docker Image CI
+name: Docker Image Build Test
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build -t th3rring/builder:dart ./dart/
+      - uses: actions/checkout@v2
+      - name: Build dart image
+        run: docker build -t th3rring/builder:dart ./dart/
+      - name: Build xe2ez image
+        run: docker build -t th3rring/builder:xe2ez ./xe2ez/
