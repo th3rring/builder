@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Build ompl image
+        run: docker build -t th3rring/builder:ompl ./ompl/
       - name: Build dart image
         run: docker build -t th3rring/builder:dart ./dart/
       - name: Build xe2ez image
