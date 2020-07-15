@@ -33,3 +33,8 @@ COPY ./entrypoint.sh /
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash"]
+
+ENV user_name=xe2ez
+RUN useradd -ms /bin/bash $user_name && ln -s /Workspace /home/$user_name/Workspace
+USER $user_name
+WORKDIR /home/$user_name

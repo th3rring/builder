@@ -1,6 +1,7 @@
 FROM ros:melodic-ros-base
 MAINTAINER Thomas Herring teh6@rice.edu
 
+
 RUN apt-get update && \
     apt-get install -y software-properties-common && \
     apt-add-repository ppa:dartsim/ppa &&\
@@ -24,3 +25,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=th3rring/builder:ompl /usr /usr
+
+ENV user_name=dart
+RUN useradd -ms /bin/bash $user_name && ln -s /Workspace /home/$user_name/Workspace
+USER $user_name
+WORKDIR /home/$user_name

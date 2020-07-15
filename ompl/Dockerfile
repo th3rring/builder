@@ -32,3 +32,7 @@ RUN apt-get update && \
     make  && \
     make install
 
+ENV user_name=ompl
+RUN useradd -ms /bin/bash $user_name && ln -s /Workspace /home/$user_name/Workspace
+USER $user_name
+WORKDIR /home/$user_name
