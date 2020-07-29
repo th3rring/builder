@@ -13,6 +13,9 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
     gnupg2 \
     sudo \
     cmake \
+    graphviz \
+    build-essential \
+    doxygen \
     libeigen3-dev \
     liborocos-kdl-dev \
     libcgal-dev \
