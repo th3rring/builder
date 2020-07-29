@@ -121,6 +121,11 @@ if [ -n "${CONTAINER_NAME:-}" ] ; then
    fi
 fi
 
+if [[ -z "${WORKSPACE_PATH}" ]]; then
+  # Print not found.
+  echo "Workspace dir not found!"
+fi
+
 ${DOCKER_EXECUTABLE:-docker} run \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
@@ -128,7 +133,7 @@ ${DOCKER_EXECUTABLE:-docker} run \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --user $(id -u):$(id -g) \
     --volume="$XAUTH:$XAUTH" \
-    -v ~/Workspace:/Workspace \
+    -v $WORKSPACE_PATH:/Workspace \
     ${NAME_OPTION:-} \
     ${DOCKER_PARAMS:-} \
     $@ ${DUMMY_DEFAULTS:-}
