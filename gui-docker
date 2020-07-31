@@ -124,9 +124,13 @@ fi
 if [[ -z "${WORKSPACE_PATH}" ]]; then
   # Print not found.
   echo "Workspace dir not found!"
+  exit 1
 fi
 
-${DOCKER_EXECUTABLE:-docker} run \
+if [[ -z "${DOTFILES_PATH}" ]]; then
+  # Print not found.
+  echo "Dotfiles not found, not sharing dev tools."
+  ${DOCKER_EXECUTABLE:-docker} run \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
     --env="XAUTHORITY=$XAUTH" \
@@ -137,6 +141,25 @@ ${DOCKER_EXECUTABLE:-docker} run \
     ${NAME_OPTION:-} \
     ${DOCKER_PARAMS:-} \
     $@ ${DUMMY_DEFAULTS:-}
+else
+  ${DOCKER_EXECUTABLE:-docker} run \
+    --env="DISPLAY=$DISPLAY" \
+    --env="QT_X11_NO_MITSHM=1" \
+    --env="XAUTHORITY=$XAUTH" \
+    --env="DOTFILES_PATH=/scripts" \
+    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+    --user $(id -u):$(id -g) \
+    --volume="$XAUTH:$XAUTH" \
+    -v $WORKSPACE_PATH:/Workspace \
+    -v $DOTFILES_PATH/scripts:/scripts \
+    ${NAME_OPTION:-} \
+    ${DOCKER_PARAMS:-} \
+    $@ ${DUMMY_DEFAULTS:-}
+
+    # --env="BASHRC_APPEND=source /scripts/devcd.sh\n export WORKSPACE_PATH=/home/\$user_name/Workspace" \
+fi
+
+
 
 # cleanup
 rm $XAUTH

@@ -27,6 +27,16 @@ RUN apt-get update && \
 COPY --from=th3rring/builder:ompl /usr /usr
 
 ENV user_name=dart
-RUN useradd -ms /bin/bash $user_name && ln -s /Workspace /home/$user_name/Workspace
+RUN useradd -ms /bin/bash $user_name && \
+    ln -s /Workspace /home/$user_name/Workspace 
 USER $user_name
 WORKDIR /home/$user_name
+
+# Copy over entrypoint and set default command to bash.
+COPY ./entrypoint.sh /
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["bash"]
+
+    # echo "source /scripts/devcd.sh" >> /home/$user_name/.bashrc && \
+    # echo "export WORKSPACE_PATH=/home/$user_name/Workspace" >> /home/$user_name/.bashrc
