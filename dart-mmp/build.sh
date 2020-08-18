@@ -7,5 +7,6 @@ TAG='dart-mmp'
 
 git submodule update --init --recursive
 docker build -t th3rring/builder:$TAG .
+# Need to run "docker run" before.
 docker push th3rring/builder:$TAG
 
