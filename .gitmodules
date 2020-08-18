@@ -1,4 +1,4 @@
-[submodule "ompl_mmp/ompl-private"]
-	path = ompl_mmp/ompl-private
+[submodule "ompl-mmp/ompl-private"]
+	path = ompl-mmp/ompl-private
 	url = git@github.com:KavrakiLab/ompl-private.git
 	branch = mmp
