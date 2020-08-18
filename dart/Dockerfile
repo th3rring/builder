@@ -21,7 +21,9 @@ RUN apt-get update && \
     wget\ 
     libyaml-cpp-dev\
     libhdf5-dev\
-    ros-${ROS_DISTRO}-fetch-ros && \
+    ros-${ROS_DISTRO}-fetch-ros\
+    ros-${ROS_DISTRO}-urdf\
+    ros-${ROS_DISTRO}-collada-urdf && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=th3rring/builder:ompl /usr /usr
