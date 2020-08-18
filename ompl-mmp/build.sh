@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Because this image depends on a private version of OMPL
+# use this script to build it locally.
+
 TAG='ompl-mmp'
 
 git submodule update --init --recursive
