@@ -29,6 +29,10 @@ RUN apt-get update && \
 COPY --from=th3rring/builder:ompl /usr /usr
 
 ENV user_name=dart
-RUN useradd -ms /bin/bash $user_name && ln -s /Workspace /home/$user_name/Workspace
+RUN  useradd -ms /bin/bash $user_name && echo $user_name:$user_name | chpasswd && \
+        adduser $user_name sudo && \
+        echo "$user_name ALL=(ALL) ALL" >> /etc/sudoers && \
+        ln -s /Workspace /home/$user_name/Workspace
+
 USER $user_name
 WORKDIR /home/$user_name
