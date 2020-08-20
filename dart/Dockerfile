@@ -26,7 +26,11 @@ RUN apt-get update && \
     ros-${ROS_DISTRO}-collada-urdf && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=th3rring/builder:ompl /usr /usr
+
+# RUN echo "y" | apt remove ros-melodic-ompl
+
+# Installed by moveit
+# COPY --from=th3rring/builder:ompl /usr /usr
 
 ENV user_name=dart
 RUN  useradd -ms /bin/bash $user_name && echo $user_name:$user_name | chpasswd && \
