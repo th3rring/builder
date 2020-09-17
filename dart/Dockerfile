@@ -11,11 +11,7 @@ RUN apt-get update && \
     g++\
     cmake\ 
     pkg-config\ 
-    libboost-serialization-dev\ 
-    libboost-filesystem-dev\ 
-    libboost-system-dev\ 
-    libboost-program-options-dev\ 
-    libboost-test-dev\ 
+    libboost-all-dev\
     libeigen3-dev\ 
     libode-dev\ 
     wget\ 
