@@ -15,6 +15,7 @@ RUN apt-get update && \
     libeigen3-dev\ 
     libode-dev\ 
     wget\ 
+    gdb\
     libyaml-cpp-dev\
     libhdf5-dev\
     ros-${ROS_DISTRO}-fetch-ros\
